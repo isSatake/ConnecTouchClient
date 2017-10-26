@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
+
 import nfc
 import binascii
 import requests
 from datetime import datetime
 
+# リーダーとなるコンピュータの固有なIDを入れる
 readerId = 22
 
 def startup(targets):
@@ -14,8 +17,11 @@ def connected(tag):
     date = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
     print("|%s| %s" % (date, id))
     params = {'nfcId': id, 'readerId': readerId}
-    res = requests.get('http://localhost:8000', params=params)
-    print(res.text)
+    try:
+        res = requests.get('http://connectouch.org/', params=params)
+        print(res.text)
+    except Exception, e:
+        print(e)
     return id
 
 def released(tag):
