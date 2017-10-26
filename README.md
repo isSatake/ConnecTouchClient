@@ -4,6 +4,8 @@
   `$ pip install nfcpy`  
   `$ pip install requests`
 ## Run
-  `$ python -m SimpleHTTPServer`  
-  `$ cd ConnecTouchClient`   
-  `$ python read-nfc.py`
+  ```
+  $ python -m SimpleHTTPServer  
+  $ cd ConnecTouchClient   
+  $ python read-nfc.py
+  ```
