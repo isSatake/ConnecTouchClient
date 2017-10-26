@@ -4,9 +4,9 @@ import nfc
 import binascii
 import requests
 from datetime import datetime
+from uuid import getnode as get_mac
 
-# リーダーとなるコンピュータの固有なIDを入れる
-readerId = 22
+readerId = get_mac() #48bit integer
 
 def startup(targets):
     print 'waiting for NFC tag ...'
@@ -15,7 +15,7 @@ def startup(targets):
 def connected(tag):
     id = binascii.hexlify(tag.identifier)
     date = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-    print("|%s| %s" % (date, id))
+    print("|%s| readerId: %s nfcId: %s" % (date, readerId, id))
     params = {'nfcId': id, 'readerId': readerId}
     try:
         res = requests.get('http://connectouch.org/', params=params)
